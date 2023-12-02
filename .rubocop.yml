@@ -4,6 +4,7 @@ AllCops:
     - "db/**/*"
     - "bin/*" 
     - "config/**/*"
+    - "app/models/**/*"
     - "Guardfile"
     - "Rakefile"
     - "node_modules/**/*"
