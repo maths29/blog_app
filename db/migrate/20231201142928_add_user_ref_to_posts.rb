@@ -1,5 +1,5 @@
 class AddUserRefToPosts < ActiveRecord::Migration[7.1]
   def change
-    add_reference :posts, :user, null: false, foreign_key: true
+    add_column :users, :name, :string unless column_exists?(:users, :name)
   end
 end
