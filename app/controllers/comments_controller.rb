@@ -7,8 +7,10 @@ class CommentsController < ApplicationController
 
   def create
     @user = current_user
-    @comment = @user.comments.build(comment_params)
+    @comment = Comment.new
+    @comment.author_id = @user.id
     @comment.post_id = params[:post_id]
+    @comment.body = params[:comment][:text]
 
     if @comment.save
       flash[:success] = 'Comment created successfully'
@@ -24,6 +26,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body)
+    p params
+    params.require(:comment).permit(:text)
   end
 end
