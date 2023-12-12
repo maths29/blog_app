@@ -11,4 +11,9 @@ class User < ApplicationRecord
   def recent_posts
     posts.order(created_at: :desc).limit(3)
   end
+
+  def destroy_with_associations
+    Post.where(author_id: id).destroy_all
+    destroy
+  end
 end
