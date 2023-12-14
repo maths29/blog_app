@@ -1,18 +1,12 @@
-<section id="body-content" class="container">
-    <%= link_to "Create New Post", new_user_post_path(current_user), class: "btn btn-primary" %>
+<% if @users.any? %>
+<%= link_to "Add a new post", new_user_post_path(user_id: @user.id), class: "btn btn-primary"%>
+<% end %>
+<% if @users.any? %>
+ <% @users.each do |user| %>
+   
+   <%= render "shared/user", user: user  %>
 
-    <% @users.each do |user| %>
-        <div class="row mt-4">
-            <div class="col-lg-2">
-                <%= image_tag("default.jpg", alt: "Default", style: "width: 70%;") %>
-            </div>
-            <div class="col-lg-10 border border-dark d-flex align-items-center">
-                <div class="user-lists w-100">
-                    <h2 class="text-dark"><%= link_to user.name, user_path(user) %></h2>
-                    <p class="d-flex justify-content-end">Number Of posts <%= user.posts_counter %></p>
-                </div>
-            </div>
-        </div>
-    <% end %>
-    
-</section>
+   <% end %>
+<% else %>
+   <h1 class="text-center m-auto">No users yet</h1>
+<% end %>

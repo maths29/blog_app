@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Users', type: :request do
   let(:valid_attributes) do
     {
-      name: 'Wood'
+      name: 'Mark'
     }
   end
 
@@ -20,7 +20,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     it 'includes correct placeholder text in the response body' do
-      expect(response.body).to include('List of all User')
+      expect(response.body).to include('Number of posts')
     end
   end
 
@@ -39,7 +39,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     it 'includes correct placeholder text in the response body' do
-      expect(response.body).to include('Specefic User Info')
+      expect(response.body).to include('Number of posts')
     end
   end
 end

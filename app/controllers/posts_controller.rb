@@ -1,34 +1,37 @@
 class PostsController < ApplicationController
-  def index
-    @user = User.find(params[:user_id])
-    @posts = @user.posts.includes(:author).includes(:comments)
-  end
-
   def show
-    logger.debug(params)
-    @user = User.find(params[:user_id])
     @post = Post.find(params[:id])
-    @comments = @post.comments
+    @index = params[:index]
+    @user = current_user
   end
 
   def new
     @user = current_user
     @post = Post.new
+    respond_to do |format|
+      format.html { render :new }
+    end
   end
 
   def create
-    @post = current_user.posts.build(post_params)
+    @post = Post.new(post_params)
+    @post.user = current_user
     if @post.save
-      redirect_to user_posts_path, notice: 'Post was successfully created.'
+      redirect_to user_posts_path(id: current_user.id)
     else
-      flash.now[:alert] = 'Something Wrong, Cannot create a new post'
+      flash.now[:alert] = 'Cannot create a new post'
       render :new
     end
+  end
+
+  def index
+    @user = User.find(params[:user_id])
+    @posts = Post.where(author_id: @user.id).includes(:comments, :user).paginate(page: params[:page], per_page: 10)
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title, :text, :user_id)
+    params.require(:post).permit(:title, :text)
   end
 end

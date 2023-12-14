@@ -128,6 +128,19 @@ To run tests, run the following command:
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/iwu-john-b92b01148/)
 
 
+👤 **Vangelis**
+
+- GitHub: [@vangelif](https://github.com/vangelif)
+- Twitter: [@vangfot](https://twitter.com/vangfot)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/vangfot)
+
+👤 **Jubaer Maruf**
+
+- GitHub: [jubaer_Maruf](https://github.com/jubaer919)
+- Twitter: [@jubaer_maruf](https://twitter.com/jubaer_maruf)
+- LinkedIn: [Jubaer Maruf](https://www.linkedin.com/in/jubaer-maruf/)
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
