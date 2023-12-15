@@ -9,7 +9,7 @@
     <% end %>
 <%= form_for(@post.comments.new, url: user_post_comments_path(@user, @post)) do |form| %>
   <div class="form-group my-2 py-2">
-    <%= form.text_area :text, placeholder: "Write a comment...", class: 'form-control mt-2 border-dark' %>
+    <%= form.text_area :body, placeholder: "Write a comment...", class: 'form-control mt-2 border-dark' %>
   </div>
 
   <%= form.submit "Add Comment", class: 'btn btn-primary' %>

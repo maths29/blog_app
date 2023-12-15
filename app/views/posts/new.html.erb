@@ -2,7 +2,7 @@
   <div class="row justify-content-center align-items-center "> <!-- Center vertically using Flexbox -->
     <div class="col-6 border border-primary rounded-1  border-2 p-5">
     <h1 class="text-center">Add new post</h1>
-      <%= render "shared/post_form" %>
+      <%= render "shared/post_form", post_id: @post.id  %>
     </div>
   </div>
 </div>

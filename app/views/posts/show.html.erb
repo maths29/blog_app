@@ -19,8 +19,8 @@
        <% if @post.comments.any? %>
     <% @post.comments.each do |comment| %>
 
-      <% if comment.user %>
-      <p><%= comment.user.name %>: <%= comment.text %></p>
+      <% if comment.author %>
+      <p><%= comment.author.name %>: <%= comment.body %></p>
       <% end %>
     <% end %>
     <% else %>
