@@ -3,33 +3,32 @@ require 'rails_helper'
 RSpec.describe 'Posts', type: :request do
   let(:valid_attributes) do
     {
-      name: 'Wood'
+      name: 'Mark'
     }
   end
 
-  describe 'GET /posts' do
+  describe 'GET /index' do
     before :each do
       @user = User.create! valid_attributes
       get user_posts_path(@user)
     end
-
     it 'returns a successful response' do
       expect(response).to be_successful
     end
 
-    it 'renders the correct template' do
+    it 'renders the index template' do
       expect(response).to render_template(:index)
     end
 
     it 'includes correct placeholder text in the response body' do
-      expect(response.body).to include('Here is List of Post for all users')
+      expect(response.body).to include('Number of posts')
     end
   end
 
-  describe 'GET /posts/:id' do
+  describe 'GET /show' do
     before :each do
       @user = User.create! valid_attributes
-      @post = @user.posts.create(title: 'First post')
+      @post = @user.posts.create(title: 'Test post')
       get user_post_path(@user, @post)
     end
 
@@ -37,12 +36,12 @@ RSpec.describe 'Posts', type: :request do
       expect(response).to be_successful
     end
 
-    it 'renders the correct template' do
+    it 'renders correct template' do
       expect(response).to render_template(:show)
     end
 
     it 'includes correct placeholder text in the response body' do
-      expect(response.body).to include('Here is initial Post')
+      expect(response.body).to include('Comments')
     end
   end
 end
