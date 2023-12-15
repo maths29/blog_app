@@ -49,9 +49,9 @@ group :development, :test do
   # gem 'capybara'
   # gem 'selenium-webdriver'
   gem 'debug', platforms: %i[mri windows]
+  gem 'launchy'
   gem 'rails-controller-testing'
   gem 'rspec-rails'
-  gem 'launchy'
 end
 
 group :development do
@@ -70,6 +70,6 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
- end
- gem 'pry-rails', group: %i[development test]
+end
+gem 'pry-rails', group: %i[development test]
 gem 'will_paginate'
