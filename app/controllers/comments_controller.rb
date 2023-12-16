@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
     else
       redirect_to redirect_url, alert: 'Failed to delete the comment.'
     end
-  end   
+  end
 
   private
 
