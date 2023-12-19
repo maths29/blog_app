@@ -1,8 +1,14 @@
-<div class="row justify-content-center align-items-center mt-4">
-  <div class="col-lg-8 col-md-11 col-11 border p-2 ">
-    <h5>Post #<%= post_id %>: <%= post.title %> </h5>
-    <br>
-    <p><%= post.text %></p>
-    <p class="text-end">comments:  <%= post.comments_counter %> , likes:  <%= post.likes_counter %> </p>
-  </div>
-</div>
+<div class="home"> 
+<h1>Add new Post</h1>
+    <%= form_with model: @post, url: user_posts_path do |form| %>
+    <div class="posts-form"> 
+	<%= form.label :title, "Title" %>
+	<div class="text-area"><%= form.text_field :title %></div>
+	<%= form.label :text, "Post" %>
+	<div class="text-area"><%= form.text_area :text %></div>
+	<button class="button-content">
+	<%= form.submit :Post %>
+	</button>
+    </div>
+    <% end %>
+	</div>
