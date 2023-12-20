@@ -1,34 +1,41 @@
-<%= render "shared/user", user: @user %>
-
-<% if @posts.any? %>
-  <% @posts.includes(comments: :author).each_with_index do |post, index| %>
-    <a href="<%= user_post_path(@user, post)%>?index=<%= index + 1 %>" class="text-decoration-none">
-      <%= render "shared/post", post: post, post_index: index + 1 %>
-      <div class="row justify-content-center align-items-center my-1">
-         <div class="col-lg-8 col-md-11 col-11 border p-2 ">
-            <% if post.comments.any? %>
-               <% post.comments.includes(:author).first(3).each do |comment| %>
-                  <p><%= comment.author.name %>: <%= comment.body %></p>
-               <% end %>
-            <% else %>
-               <p>No comments yet</p>
-            <% end %>
-         </div>
-      </div>
-    </a>  
-  <% end %>
-<% else %>
-  <p>No posts yet</p>
-<% end %>
-
+<div class="home">
+    <%= render partial: "users/user", users: @users%>
+    <% @posts.each do |post| %>
+    <div class="posts-of-user">
+        <div class="posts">
+            <a href="<%= user_post_path(post.author_id,post.id) %>" class="post-details">
+                <h2 class="post-id">Post #<%= post.id %></h2>
+                <div class="posts-reactions">
+                    <p class="posts-text"><%= post.text %><p>
+                    <div class="reactions">
+                        <span>Comments: <%= post.comments.count %></span>
+                        <span>Likes: <%= post.likes.count %></span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <ul>
+        <% unless post.comments.any? %>
+            <h2 class="no-comments">There are no comments to show.</h2>
+        <% end %>
+        <% post.recent_five_comments.each do |comment| %>
+            <li>
+            <p><%= User.find(comment.user_id).name %>:</p>
+            <p><%= comment.text %></p>
+            </li>
+        <% end %>
+        </ul>
+        <% end %>
+    </div>
+    <button class="button">
+        <a class="button-content">Pagination</a>
+    </button>
 </div>
 
 
- 
-<div class="row justify-content-center align-items-center my-1">
 
-  <div class=" col-2">
-    <%= will_paginate @posts %>
-  </div>
 
-</div>
+
+
+
+
