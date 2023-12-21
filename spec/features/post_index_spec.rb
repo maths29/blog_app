@@ -41,11 +41,13 @@ RSpec.feature 'Post Index Page' do
     visit user_posts_path(user1)
     expect(page).to have_content(post1.text)
   end
-  scenario 'Displays the first comments on a post & total comments' do
-    visit user_posts_path(user)
-    expect(page).to have_content(comment2.text)
-    expect(page).to have_content("comments: #{post.comments_counter}")
+  
+  scenario 'Displays the first comments on a post' do
+    visit user_posts_path(user1)
+    expect(page).to have_content(comment2.body)  # Use comment2.body instead of comment2.text
+    expect(page).to have_content("comments: #{post1.comments_counter}")
   end
+
   scenario 'Displays comments count' do
     visit user_posts_path(user1)
     expect(page).to have_content("comments: #{post1.comments.count}")
