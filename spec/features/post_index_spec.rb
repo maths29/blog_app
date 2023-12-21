@@ -44,7 +44,7 @@ RSpec.feature 'Post Index Page' do
   
   scenario 'Displays the first comments on a post' do
     visit user_posts_path(user1)
-    expect(page).to have_content(comment2.body)  # Use comment2.body instead of comment2.text
+    expect(page).to have_content(comment2.body) 
     expect(page).to have_content("comments: #{post1.comments_counter}")
   end
 
