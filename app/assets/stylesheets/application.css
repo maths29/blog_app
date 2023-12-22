@@ -19,7 +19,8 @@
   padding: 0;
 }
 
-.login-section {
+.login-section,
+.signup-section {
   display: flex;
   flex-direction: column;
   align-items: center;
