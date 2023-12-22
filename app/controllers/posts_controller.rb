@@ -6,12 +6,7 @@ class PostsController < ApplicationController
     @user = current_user
   end
 
-  def new
-    @user = current_user
-    @post = Post.new
-    respond_to do |format|
-      format.html { render :new }
-    end
+
   end
 
   def create
