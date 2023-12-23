@@ -8,4 +8,8 @@ Rails.application.routes.draw do
        resources :likes, only: [:create, :new] 
     end
   end
+  get "/posts", to: "posts#user_post"
 end
+
+
+
