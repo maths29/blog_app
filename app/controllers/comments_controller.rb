@@ -20,13 +20,12 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     authorize! :destroy, @comment
-    redirect_url = request.referer || fallback_url
-
     if @comment.destroy
-      redirect_to redirect_url, notice: 'Comment was successfully deleted.'
+      flash.now[:success] = 'Comment was successfully deleted!'
     else
-      redirect_to redirect_url, alert: 'Failed to delete the comment.'
+      flash[:error] = 'Comment couldnt be deleted!'
     end
+    redirect_to user_post_path(@comment.post.author, @comment.post)
   end
 
   private
