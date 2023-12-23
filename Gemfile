@@ -74,4 +74,5 @@ end
 gem 'pry-rails', group: %i[development test]
 gem 'will_paginate'
 
+gem 'cancancan'
 gem 'devise', '~> 4.9'
