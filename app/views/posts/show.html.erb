@@ -10,7 +10,7 @@
     
     <br>
     <p><%= @post.text %></p>
-    # <% if can?(:destroy, @post) %>
+    <% if can?(:destroy, @post) %>
     <%= button_to 'Delete Post', user_post_path(@post.user, @post), method: :delete, class: 'btn btn-danger' %>
   <% end %>
   </div>
@@ -28,7 +28,8 @@
        <div>
           <% if comment.author %>
             <% if can? :destroy, comment %>
-              <%= button_to "Delete Comment", user_post_comment_path(user_id: @user.id, post_id: post.id, id: comment.id), method: :delete,  class: 'delete-comment-btn' %>
+            <%= button_to "Delete Comment", user_post_comment_path(user_id: @user.id, post_id: @post.id, id: comment.id), method: :delete,  class: 'delete-comment-btn' %>
+
             <% end %>
             <p><%= comment.author.name %>: <%= comment.body %></p>
           <% end %>

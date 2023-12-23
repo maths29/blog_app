@@ -6,6 +6,8 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @index = params[:index]
     @user = current_user
+    @comment = Comment.new
+    @like = Like.new
   end
 
   def new
@@ -34,13 +36,16 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
+
     authorize! :destroy, @post
+    @author = @post.user
+    @author.decrement!(:posts_counter)
+    @post.destroy
     if @post.destroy
-      flash.now[:success] = 'Post was successfully destroyed!'
+      redirect_to user_posts_path(current_user), notice: 'post was successfully deleted.'
     else
-      flash[:error] = 'Post couldnt be destroyed!'
+      redirect_to redirect_url, alert: 'Failed to delete the post.'
     end
-    redirect_to user_posts_path
   end
 
   private
