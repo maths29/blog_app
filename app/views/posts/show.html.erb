@@ -2,7 +2,9 @@
   <div class="col-lg-8 col-md-11 col-11 border p-lg-2 p-1">
     <div class="d-flex justify-content-between">
       <h5><%= @post.title %> by <%=  @post.user.name %></h5>
-
+      <% if @post && can?(:destroy, @post) %>
+          <%= button_to "Delete Post", user_post_path(user_id: @user.id, id: @post.id), method: :delete, class: "delete-btn" %>
+      <% end %>
       <p>Comments: <%= @post.comments_counter %> , Likes:  <%= @post.likes_counter %></p>
     </div>
     
@@ -21,18 +23,21 @@
    
     <div class="my-3">
        
-       <% if @post.comments.any? %>
-    <% @post.comments.each do |comment| %>
-
-      <% if comment.author %>
-      <p><%= comment.author.name %>: <%= comment.body %></p>
-      <% end %>
-    <% end %>
-    <% else %>
-      <p>No comments yet</p>
-    <% end %>
+      <% if @post.comments.any? %>
+      <% @post.comments.each do |comment| %>
+       <div>
+          <% if comment.author %>
+            <% if can? :destroy, comment %>
+              <%= button_to "Delete Comment", user_post_comment_path(user_id: @user.id, post_id: post.id, id: comment.id), method: :delete,  class: 'delete-comment-btn' %>
+            <% end %>
+            <p><%= comment.author.name %>: <%= comment.body %></p>
+          <% end %>
+          <% end %>
+          <% else %>
+            <p>No comments yet</p>
+          <% end %>
+        </div> 
     </div>
-   
   </div>
  
 </div>
