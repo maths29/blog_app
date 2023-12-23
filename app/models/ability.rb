@@ -1,20 +1,18 @@
 # frozen_string_literal: true
 class Ability
   include CanCan::Ability
-
   def initialize(user)
     user ||= User.new # Guest user (not logged in)
-    can :create, Comment if user.persisted? # Allow creating comments for logged-in users
-      # Define abilities for different roles
+    can :read, Post
+    if user.persisted?
+      can :create, Comment
+      can :read, Post, author_id: user.id
+      can :destroy, Comment, author_id: user.id
       if user.admin?
-        can :manage, :all # Admins can manage all resources
+        can :manage, :all
       else
-        can :read, :all
-        can :create, Post
-        can :read, Post, user_id: user.id
-        can :destroy, Post, author_id: user.id
-        can :destroy, Comment, author_id: user.id
-  
+        can [:update, :api_index, :api_comments, :api_add_comment], Post, author_id: user.id
       end
     end
+  end
 end
