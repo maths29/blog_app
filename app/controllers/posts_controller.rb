@@ -8,7 +8,6 @@ class PostsController < ApplicationController
     @comment = Comment.new
     @like = Like.new
   end
-
   def new
     @user = current_user
     @post = Post.new
@@ -16,7 +15,6 @@ class PostsController < ApplicationController
       format.html { render :new }
     end
   end
-
   def create
     @post = Post.new(post_params)
     @post.user = current_user
@@ -27,12 +25,10 @@ class PostsController < ApplicationController
       render :new
     end
   end
-
   def index
     @user = User.find(params[:user_id])
     @posts = Post.where(author_id: @user.id).includes(:comments, :user).paginate(page: params[:page], per_page: 10)
   end
-
   def destroy
     @post = Post.find(params[:id])
     authorize! :destroy, @post
@@ -45,21 +41,19 @@ class PostsController < ApplicationController
       redirect_to redirect_url, alert: 'Failed to delete the post.'
     end
   end
-
+  
   def api_index
     @user = User.find(params[:user_id])
     @posts = Post.where(author_id: @user.id).includes(:comments, :user).paginate(page: params[:page], per_page: 10)
     render json: @posts
   end
 
-  # API endpoint to list all comments for a user's post
   def api_comments
     @post = Post.find(params[:post_id])
     @comments = @post.comments
     render json: @comments
   end
 
-  # API endpoint to add a comment to a post
   def api_add_comment
     @post = Post.find(params[:post_id])
     @comment = Comment.new(comment_params)
@@ -70,15 +64,10 @@ class PostsController < ApplicationController
       render json: { error: 'Failed to create comment' }, status: :unprocessable_entity
     end
   end
-
   private
-
   def comment_params
     params.require(:comment).permit(:text, :post_id)
   end
-
-  private
-
   def post_params
     params.require(:post).permit(:title, :text)
   end
