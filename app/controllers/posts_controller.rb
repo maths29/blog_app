@@ -46,36 +46,7 @@ class PostsController < ApplicationController
     end
   end
 
-  # def api_index
-  #   @user = User.find(params[:user_id])
-  #   @posts = Post.where(author_id: @user.id).includes(:comments, :user).paginate(page: params[:page], per_page: 10)
-  #   render json: @posts
-  # end
-
-  # # API endpoint to list all comments for a user's post
-  # def api_comments
-  #   @post = Post.find(params[:post_id])
-  #   @comments = @post.comments
-  #   render json: @comments
-  # end
-
-  # # API endpoint to add a comment to a post
-  # def api_add_comment
-  #   @post = Post.find(params[:post_id])
-  #   @comment = Comment.new(comment_params)
-  #   @comment.user = current_user
-  #   if @comment.save
-  #     render json: @comment, status: :created
-  #   else
-  #     render json: { error: 'Failed to create comment' }, status: :unprocessable_entity
-  #   end
-  # end
-
   private
-
-  # def comment_params
-  #   params.require(:comment).permit(:text, :post_id)
-  # end
 
   def post_params
     params.require(:post).permit(:title, :text)
