@@ -1,5 +1,4 @@
 class Api::V1::CommentsController < ApplicationController
-  before_action :find_post, only: %i[index create]
   skip_before_action :verify_authenticity_token
 
   def index
