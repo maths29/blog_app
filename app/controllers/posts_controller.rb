@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!
+
   def show
     @post = Post.find(params[:id])
     @index = params[:index]
@@ -35,6 +36,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
+
     authorize! :destroy, @post
     @author = @post.user
     @author.decrement!(:posts_counter)
